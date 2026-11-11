@@ -39,3 +39,6 @@ OUTPUT_DIR = "output"            # 가상 프린터가 인쇄용 이미지를 �
 # ---- 버튼 ----
 GPIO_BUTTON_PIN = 17             # BCM 번호
 BUTTON_PULL_UP = False           # 눌렀을 때 값이 반대로 나오면 True/False를 바꿔 본다
+
+# ---- 화면 테마 ----
+THEME = "christmas"              # "christmas"(브라운+버건디, 크리스마스 장식) 또는 "pastel"(하늘색+분홍)

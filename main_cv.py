@@ -1,3 +1,12 @@
+"""OpenCV 창으로 띄우는 실행 파일 (main.py의 Tkinter 대신).
+
+구형 Tk(8.5)에서 창이 비어 보일 때 쓴다. 동작 순서(booth.py)와 화면 그리기(render.py)는 그대로이고
+'창을 띄우고 키를 받는 부분'만 다르다.
+
+  python main_cv.py               창 모드
+  python main_cv.py --fullscreen  전체화면
+  SPACE: 촬영 시작 / ESC 또는 q: 종료   (키는 창을 한 번 클릭해 포커스를 준 뒤 눌러야 한다)
+"""
 import argparse
 
 import cv2
@@ -12,7 +21,7 @@ from printer import ThermalPrinter
 from render import render
 
 WINDOW = "Photobooth"
-SIZE = (800, 600)
+SIZE = (800, 480)
 
 
 def main():
@@ -36,9 +45,9 @@ def main():
         cv2.resizeWindow(WINDOW, *SIZE)
     try:
         while True:
-            img = render(booth.tick(), SIZE)
-            cv2.imshow(WINDOW, cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR))
-            key = cv2.waitKey(30) & 0xFF
+            img = render(booth.tick(), SIZE)                       # PIL(RGB) 한 장
+            cv2.imshow(WINDOW, cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR))   # OpenCV는 BGR 순서
+            key = cv2.waitKey(30) & 0xFF                           # 30ms 기다리며 키 입력 확인
             if key == 32:
                 button.press()
             elif key in (27, ord("q")):

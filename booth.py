@@ -34,6 +34,7 @@ class Frame:
     big_text: str = ""     # 카운트다운 숫자
     hint: str = ""
     notice: str = ""       # 오류/안내 (잠깐 표시)
+    filter_name: str = ""  # 현재 선택된 필터의 이름(화면의 필터 목록 강조용)
 
 
 class Booth:
@@ -90,6 +91,11 @@ class Booth:
 
     # ---------- 프레임마다 호출 ----------
     def tick(self, now=None):
+        frame = self._tick(now)
+        frame.filter_name = self.filter_name
+        return frame
+
+    def _tick(self, now=None):
         now = time.monotonic() if now is None else now
         frame = self.camera.read()
         pressed = self.button.consume()          # 어떤 상태에서든 눌림은 소비 -> IDLE이 아니면 버려짐

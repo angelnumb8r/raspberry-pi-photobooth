@@ -69,6 +69,16 @@ python tests/test_pipeline.py
 - 버튼 모듈(KY-004)의 전원은 GPIO 보호를 위해 5V가 아니라 3.3V에 연결한다.
 - 프린터는 자체 전원 어댑터를 쓰고, 라즈베리파이 전원과 분리한다.
 
+## 화면(UI)
+
+화면은 5개다: 대기(미리보기 + 필터 목록), 카운트다운, 결과(실제 인쇄될 흑백 이미지), 인쇄 중, 오류 안내.
+
+- 800x480 기준 크기에서 픽셀 단위로 그린 뒤 모니터 크기에 맞게 확대한다 (사진만 부드럽게 따로 붙임)
+- 테마: `config.py`의 `THEME`으로 고른다. `christmas`(옅은 브라운 + 버건디 포인트, 트리·선물·눈송이 등) / `pastel`(하늘색 + 분홍)
+- 색상은 `render.py`의 `PALETTES`, 장식은 `_draw_doodles`, 필터 이름은 `FILTER_NAMES`에서 바꾼다
+- 글꼴: Press Start 2P (SIL Open Font License 1.1, `assets/fonts/OFL.txt`). 파일이 없으면 기본 글꼴로 대체됨
+- 화면 미리보기: `docs/ui_preview.png`
+
 ## 파일 구조
 
 | 파일 | 역할 | 이전 시 |
