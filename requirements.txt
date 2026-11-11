@@ -1,0 +1,7 @@
+opencv-python>=4.8,<5   # 5.x에는 얼굴 검출용 Haar 파일이 빠져 있음
+pillow>=10.1
+numpy
+python-escpos
+pyusb
+gpiozero
+mediapipe
