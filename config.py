@@ -29,7 +29,10 @@ FILTER_LABELS = {"basic": "BASIC", "contrast": "HIGH CONTRAST", "cat": "CAT", "s
 
 # ---- 동작 흐름 ----
 COUNTDOWN_SECONDS = 3
-RESULT_SECONDS = 3               # 촬영 결과를 보여주는 시간
+DEFAULT_MODE = 4                 # SPACE(또는 물리 버튼)로 넘어갈 때 쓰는 기본 모드: 1(1컷) 또는 4(4컷)
+FLASH_SECONDS = 0.12             # 촬영 순간 화면이 하얗게 번쩍이는 시간
+INTERVAL_SECONDS = 1.2           # 4컷에서 한 장 찍은 뒤 다음 카운트다운까지 쉬는 시간(찍힌 사진을 보여 줌)
+DONE_SECONDS = 10                # 인쇄가 끝난 뒤 초기 화면으로 돌아가기까지의 시간
 
 # ---- 프린터 ----
 PRINT_WIDTH = 384                # 58mm 감열 프린터의 가로 점 수(모델에 따라 다름, 사양서 확인)
@@ -41,4 +44,12 @@ GPIO_BUTTON_PIN = 17             # BCM 번호
 BUTTON_PULL_UP = False           # 눌렀을 때 값이 반대로 나오면 True/False를 바꿔 본다
 
 # ---- 화면 테마 ----
-THEME = "christmas"              # "christmas"(브라운+버건디, 크리스마스 장식) 또는 "pastel"(하늘색+분홍)
+THEME = "mono"                   # "mono"(블랙·차콜·실버) / "christmas"(브라운+버건디) / "pastel"(하늘색+분홍)
+
+# ---- 이 기기만의 설정 (저장소에 올리지 않는 config_local.py) ----
+# 카메라 방향, 프린터 ID처럼 기기마다 다른 값은 config_local.py에 적는다. 파일이 없으면 무시된다.
+# 예) RPICAM_EXTRA_ARGS = ["--rotation", "180"]   # CSI 카메라가 거꾸로 달려 있을 때
+try:
+    from config_local import *   # noqa: F401,F403
+except ImportError:
+    pass

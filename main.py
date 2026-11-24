@@ -15,7 +15,7 @@ from camera import Camera
 from filters import FilterBank
 from hand_gesture import HandGesture
 from printer import ThermalPrinter
-from render import render
+from render import FILTER_ORDER, hit_test, render
 
 
 def main():
@@ -42,11 +42,18 @@ def main():
         root.geometry("800x600")
     label = tk.Label(root, bg="black")
     label.pack(fill="both", expand=True)
+    shown = {"state": booth.state}
+    label.bind("<Button-1>", lambda e: (lambda a: a and booth.handle(a))(
+        hit_test(e.x, e.y, (max(label.winfo_width(), 320), max(label.winfo_height(), 240)), shown["state"])))
+    for i, name in enumerate(FILTER_ORDER):
+        root.bind(str(i + 1), lambda e, n=name: booth.handle(("filter", n)))
+    root.bind("b", lambda e: booth.handle(("back",)))
     root.bind("<space>", lambda e: button.press())
     root.bind("<Escape>", lambda e: root.destroy())
 
     def loop():
         frame = booth.tick()
+        shown["state"] = frame.state
         size = (max(label.winfo_width(), 320), max(label.winfo_height(), 240))
         photo = ImageTk.PhotoImage(render(frame, size))
         label.configure(image=photo)

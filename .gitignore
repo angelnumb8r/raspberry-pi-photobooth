@@ -12,3 +12,6 @@ output/*
 
 # 손 인식 모델 파일(약 7.8MB). README의 명령으로 각자 내려받음
 models/*.task
+
+# 이 기기만의 설정(카메라 방향 등). 기기마다 달라서 올리지 않음
+config_local.py
